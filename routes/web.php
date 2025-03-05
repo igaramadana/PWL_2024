@@ -4,6 +4,9 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -85,3 +88,16 @@ Route::get('/greeting', function () {
 });
 
 Route::get('/greeting', [WelcomeController::class, 'greeting']);
+
+// Soal Praktikum Jobsheet 2
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('category')->group(function () {
+    Route::get('/food-beverage', [ProductController::class, 'foodBeverage'])->name('products.foodBeverage');
+    Route::get('/beauty-health', [ProductController::class, 'beautyHealth'])->name('products.beautyHealth');;
+    Route::get('/home-care', [ProductController::class, 'homeCare'])->name('products.homeCare');;
+    Route::get('/baby-kid', [ProductController::class, 'babyKid'])->name('products.babyKid');;
+});
+
+Route::get('/user/{id}/name/{name}', [UserController::class, 'show'])->name('user.show');
+Route::get('/sales', [SaleController::class, 'index'])->name('sales.index');
